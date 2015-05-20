@@ -1,0 +1,19 @@
+{
+  "name": "kanban-resources",
+  "version": "1.0.0",
+  "authors": [
+    "xiaoliang <32414154@qq.com>"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "libs",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "requirejs": "~2.1.17"
+  }
+}

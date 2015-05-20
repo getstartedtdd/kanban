@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+    <meta charset="UTF-8"/>
+    <title></title>
+    <link rel="stylesheet" href="../css/app.css" th:href="@{/css/app.css}"/>
+
+    <script th:inline="javascript">
+        /*[-*/
+        //the code below this will removed by thymeleaf
+        var require = {baseUrl: '../js'};
+        /*-]*/
+
+        /*[+
+         //the code below this will added by thymeleaf
+         var require = {baseUrl: [[@{/js}]]};
+         +]*/
+    </script>
+    <script src="../libs/requirejs/require.js" data-main="app" th:src="@{/libs/requirejs/require.js}"></script>
+</head>
+<body>
+<p th:text="Kanban">Static</p>
+</body>
+</html>
