@@ -21,6 +21,7 @@
 ## 安装
 
 1.  在使用项目之前确保你已安装如下软件:
+
 ![Maven](http://maven.apache.org/images/maven-logo-black-on-white.png) | ![NodeJs](http://images.51cto.com/files/uploadimg/20121108/1001291.jpg)
 ---------------------------------------------------------------------- | ------------------------------------------------------------------------
 [Maven](http://maven.apache.org/download.cgi)                          | [NodeJs](https://nodejs.org/download/)
