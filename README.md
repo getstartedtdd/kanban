@@ -69,3 +69,12 @@ cd kanban-resources
 grunt less:war
 grunt watch:war
 ```
+
+## 涉及的技术
+
+- [springframework](http://projects.spring.io/spring-framework/)
+- [thymeleaf](http://www.thymeleaf.org)
+- [less](http://lesscss.org/)
+- [requirejs](http://www.requirejs.cn)
+- [bower](http://bower.io)
+- [npm](https://www.npmjs.com/)
