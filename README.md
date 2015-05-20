@@ -48,3 +48,24 @@
         npm install
         bower install
     ```
+
+##使用
+
+项目开发人员在进行开发之前需要首先运行如下命令:
+
+
+### 前端开发人员
+
+```
+cd kanban-resources
+grunt less:dev
+grunt watch:dev
+```
+
+### 后端开发人员
+
+```
+cd kanban-resources
+grunt less:war
+grunt watch:war
+```

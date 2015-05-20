@@ -82,11 +82,11 @@ module.exports = function (grunt) {
             }
         },
         watch: {
-            less4war: {
+            war: {
                 files: ['less/**/*.less'],
                 tasks: ['newer:less:war']
             },
-            less4dev: {
+            dev: {
                 files: ['less/**/*.less'],
                 tasks: ['newer:less:dev']
             }
