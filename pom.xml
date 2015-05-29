@@ -12,6 +12,27 @@
         <module>kanban-app</module>
         <module>kanban-resources</module>
     </modules>
-
+    <repositories>
+        <repository>
+            <id>maven central</id>
+            <name>maven central</name>
+            <url>https://repository.jboss.org/nexus/content/repositories/central/</url>
+        </repository>
+        <repository>
+            <id>maven2</id>
+            <name>maven2</name>
+            <url>http://repo1.maven.org/maven2</url>
+        </repository>
+        <repository>
+            <id>selenium</id>
+            <name>Selenium release repository</name>
+            <url>http://nexus.openqa.org/content/repositories/releases</url>
+        </repository>
+        <repository>
+            <id>central</id>
+            <name>central repository</name>
+            <url>http://nexus.openqa.org/content/repositories/central/</url>
+        </repository>
+    </repositories>
 
 </project>
