@@ -1,8 +1,14 @@
 package test.support;
 
+import org.hamcrest.CoreMatchers;
+import org.hamcrest.Matcher;
 import org.mortbay.util.ajax.JSON;
 import org.springframework.security.config.BeanIds;
+import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
+import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
+import org.springframework.security.oauth2.provider.OAuth2Authentication;
+import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;
 import org.springframework.test.web.servlet.ResultActions;
@@ -12,13 +18,16 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.setup.DefaultMockMvcBuilder;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.filter.DelegatingFilterProxy;
 
-import javax.servlet.Filter;
-
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.hamcrest.CoreMatchers.allOf;
+import static org.hamcrest.CoreMatchers.containsString;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
 
 /**
@@ -28,13 +37,15 @@ public class ThikiServer implements Endpoint {
     private MockMvc mvc;
     private ResultActions result;
     private Map<String, String> accessToken = new HashMap<String, String>();
+    private TokenStore tokenStore;
 
     public ThikiServer(WebApplicationContext webApplicationContext) {
         mvc = enableSpringSecurity(MockMvcBuilders.webAppContextSetup(webApplicationContext), webApplicationContext).build();
+        tokenStore = webApplicationContext.getBean(TokenStore.class);
     }
 
     private DefaultMockMvcBuilder enableSpringSecurity(DefaultMockMvcBuilder builder, WebApplicationContext webApplicationContext) {
-        return builder.addFilter(webApplicationContext.getBean(BeanIds.SPRING_SECURITY_FILTER_CHAIN, Filter.class), "/*");
+        return builder.addFilter(new DelegatingFilterProxy(BeanIds.SPRING_SECURITY_FILTER_CHAIN, webApplicationContext), "/*");
     }
 
 
@@ -60,15 +71,27 @@ public class ThikiServer implements Endpoint {
         assertFailingOn(OAuth2Exception.INVALID_GRANT);
     }
 
-    public void expectAccessTokenExpires() {
-        //todo:how to expire an accessToken
+    public void whenAccessTokenExpired() {
+        OAuth2AccessToken accessToken = tokenStore.readAccessToken(accessToken());
+        tokenStore.storeAccessToken(expires(accessToken), tokenStore.readAuthentication(accessToken));
+    }
+
+    private String accessToken() {
+        return accessToken.get("access_token");
+    }
+
+    private DefaultOAuth2AccessToken expires(OAuth2AccessToken accessToken) {
+        DefaultOAuth2AccessToken expired = new DefaultOAuth2AccessToken(accessToken);
+        expired.setExpiration(new Date(System.currentTimeMillis() - 1000));
+        return expired;
     }
 
     public void assertAnAccessTokenExpiredMessageSent() throws Exception {
-        assertFailingOn(OAuth2Exception.INVALID_TOKEN);
+        assertFailingOn(OAuth2Exception.INVALID_TOKEN,containsString("Access token expired"));
     }
-    private void assertFailingOn(String error) throws Exception {
-        result.andExpect(jsonPath("error").value(error));
+
+    private void assertFailingOn(String error, Matcher<String>... descriptionMatchers) throws Exception {
+        result.andExpect(jsonPath("error").value(error)).andExpect(jsonPath("error_description").value(allOf(descriptionMatchers)));
     }
 
     public void login(String username, String password) throws Exception {
@@ -81,7 +104,7 @@ public class ThikiServer implements Endpoint {
     }
 
     private MockHttpServletRequestBuilder withAccessToken(MockHttpServletRequestBuilder request) {
-        return request.param("access_token", accessToken.get("access_token"));
+        return request.param("access_token", accessToken());
     }
 
 

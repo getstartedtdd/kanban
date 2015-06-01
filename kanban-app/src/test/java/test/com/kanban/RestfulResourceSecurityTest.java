@@ -49,7 +49,7 @@ public class RestfulResourceSecurityTest {
         client.loginAs("admin", "admin");
         server.assertAccessTokenCreated();
 
-        server.expectAccessTokenExpires();
+        server.whenAccessTokenExpired();
 
         client.listAllUsers();
         server.assertAnAccessTokenExpiredMessageSent();
