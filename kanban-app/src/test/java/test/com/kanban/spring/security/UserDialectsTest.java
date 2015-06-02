@@ -3,7 +3,6 @@ package test.com.kanban.spring.security;
 import com.kanban.core.Role;
 import com.kanban.core.User;
 import com.kanban.spring.security.UserDialects;
-import com.kanban.utils.CollectionUtils;
 import org.hamcrest.Matcher;
 import org.junit.Before;
 import org.junit.Test;
@@ -12,7 +11,9 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.provider.ClientDetails;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 
 import static com.kanban.matchers.UserMatchers.*;
 import static com.kanban.spring.security.UserDialects.grant;

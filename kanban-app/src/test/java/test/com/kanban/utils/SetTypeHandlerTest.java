@@ -16,9 +16,7 @@ import java.util.Collections;
 import java.util.Set;
 
 import static com.kanban.utils.CollectionUtils.asSet;
-import static org.hamcrest.Matchers.empty;
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasSize;
+import static org.hamcrest.Matchers.*;
 import static org.junit.Assert.assertThat;
 
 

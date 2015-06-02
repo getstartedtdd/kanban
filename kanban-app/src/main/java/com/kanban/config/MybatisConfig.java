@@ -3,9 +3,7 @@ package com.kanban.config;
 import com.kanban.core.UserRepository;
 import com.kanban.utils.SetTypeHandler;
 import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.type.TypeHandler;
-import org.apache.ibatis.type.TypeHandlerRegistry;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +15,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.io.support.ResourcePatternResolver;
 import org.springframework.stereotype.Repository;
 
-import javax.annotation.PostConstruct;
 import javax.sql.DataSource;
 import java.io.IOException;
 
