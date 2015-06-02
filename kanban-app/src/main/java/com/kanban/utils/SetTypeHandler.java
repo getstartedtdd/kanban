@@ -20,30 +20,44 @@ import java.util.Set;
 @MappedJdbcTypes({JdbcType.VARCHAR, JdbcType.NVARCHAR})
 public class SetTypeHandler implements TypeHandler<Set<String>> {
 
-    @Override
-    public void setParameter(PreparedStatement ps, int i, Set parameter, JdbcType jdbcType) throws SQLException {
+    public static final String DELIMITER = ",";
 
+    @Override
+    public void setParameter(PreparedStatement ps, int parameterIndex, Set parameter, JdbcType jdbcType) throws SQLException {
+        ps.setObject(parameterIndex, wrap(parameter), jdbcType.TYPE_CODE);
+    }
+
+    private String wrap(Set<String> items) {
+        if (items == null || items.isEmpty()) {
+            return "";
+        }
+        StringBuilder result = new StringBuilder();
+        for (String item : items) {
+            result.append(item);
+            result.append(DELIMITER);
+        }
+        return result.delete(result.length() - DELIMITER.length(), result.length()).toString();
     }
 
     @Override
     public Set<String> getResult(ResultSet rs, String columnName) throws SQLException {
-        return wrap(rs.getString(columnName));
+        return unwrap(rs.getString(columnName));
     }
 
     @Override
     public Set<String> getResult(ResultSet rs, int columnIndex) throws SQLException {
-        return wrap(rs.getString(columnIndex));
+        return unwrap(rs.getString(columnIndex));
     }
 
     @Override
     public Set<String> getResult(CallableStatement cs, int columnIndex) throws SQLException {
-        return wrap(cs.getString(columnIndex));
+        return unwrap(cs.getString(columnIndex));
     }
 
-    private Set<String> wrap(String items) {
+    private Set<String> unwrap(String items) {
         if (items == null) {
             return new HashSet<String>();
         }
-        return new HashSet<String>(Arrays.asList(items.split(",")));
+        return new HashSet<String>(Arrays.asList(items.split(DELIMITER)));
     }
 }
