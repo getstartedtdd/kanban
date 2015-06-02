@@ -153,6 +153,12 @@
         <spring-security.version>4.0.0.RELEASE</spring-security.version>
     </properties>
     <build>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+                <filtering>true</filtering>
+            </resource>
+        </resources>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -173,6 +179,24 @@
                     </webResources>
                     <packagingExcludes>libs/**</packagingExcludes>
                 </configuration>
+            </plugin>
+            <plugin>
+                <groupId>com.carbonfive.db-support</groupId>
+                <artifactId>db-migration-maven-plugin</artifactId>
+                <version>0.9.9-m2</version>
+                <configuration>
+                    <url>${jdbc.url}</url>
+                    <username>${jdbc.user}</username>
+                    <password>${jdbc.password}</password>
+                    <migrationsPath>../db/migrations</migrationsPath>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>mysql</groupId>
+                        <artifactId>mysql-connector-java</artifactId>
+                        <version>5.1.21</version>
+                    </dependency>
+                </dependencies>
             </plugin>
         </plugins>
     </build>
