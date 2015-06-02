@@ -1,13 +1,11 @@
 package test.support;
 
-import org.hamcrest.CoreMatchers;
 import org.hamcrest.Matcher;
 import org.mortbay.util.ajax.JSON;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.oauth2.common.DefaultOAuth2AccessToken;
 import org.springframework.security.oauth2.common.OAuth2AccessToken;
 import org.springframework.security.oauth2.common.exceptions.OAuth2Exception;
-import org.springframework.security.oauth2.provider.OAuth2Authentication;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.MvcResult;

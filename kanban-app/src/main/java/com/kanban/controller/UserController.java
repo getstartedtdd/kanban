@@ -1,13 +1,9 @@
 package com.kanban.controller;
 
-import com.kanban.core.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.PostConstruct;
 import java.util.Collections;
 import java.util.List;
 
