@@ -10,7 +10,7 @@
     </context-param>
     <context-param>
         <param-name>contextConfigLocation</param-name>
-        <param-value>com.kanban.config.WebSecurityConfig</param-value>
+        <param-value>com.kanban.config.ApplicationConfig</param-value>
     </context-param>
 
     <listener>
@@ -35,7 +35,7 @@
         </init-param>
         <init-param>
             <param-name>contextConfigLocation</param-name>
-            <param-value>com.kanban.config.WebConfiguration</param-value>
+            <param-value>com.kanban.config.WebMvcConfig</param-value>
         </init-param>
         <load-on-startup>1</load-on-startup>
     </servlet>

@@ -14,6 +14,10 @@ import org.mortbay.jetty.webapp.WebAppContext;
 import org.mortbay.resource.ResourceCollection;
 import org.w3c.dom.Element;
 
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.TimeUnit;
+
 import static org.hamcrest.CoreMatchers.containsString;
 import static org.hamcrest.CoreMatchers.equalTo;
 import static org.junit.Assert.assertThat;
@@ -55,14 +59,14 @@ public class KanbanBootstrapTest {
     }
 
     private static class AlertSpy implements AlertHandler {
-        private String message;
+        private BlockingQueue<String> message = new ArrayBlockingQueue<String>(1);
 
         public void handleAlert(Page page, String content) {
-            this.message = content;
+            message.add(content);
         }
 
-        public void assertAlertWithMessage(Matcher<String> matcher) {
-            assertThat(message, matcher);
+        public void assertAlertWithMessage(Matcher<String> matcher) throws InterruptedException {
+            assertThat(message.poll(1, TimeUnit.SECONDS), matcher);
         }
     }
 }

@@ -1,9 +1,11 @@
 package com.kanban.config;
 
+import com.kanban.core.UserRepository;
+import com.kanban.spring.security.SimpleUserDetailsDialect;
+import com.kanban.spring.security.UserDetailsServiceAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
 import org.springframework.context.annotation.Primary;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -19,25 +21,23 @@ import org.springframework.security.oauth2.config.annotation.web.configuration.R
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerEndpointsConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;
 import org.springframework.security.oauth2.config.annotation.web.configurers.ResourceServerSecurityConfigurer;
-import org.springframework.security.oauth2.provider.client.ClientCredentialsTokenEndpointFilter;
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
-import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 
 /**
- * Created by L.x on 15-5-29.
+ * Created by L.x on 15-6-2.
  */
-@Configuration
 @EnableWebSecurity
-@Import({WebSecurityConfig.WebResourceConfig.class, WebSecurityConfig.OAuth2Config.class})
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
     public static final String RESOURCE_ID = "kanban";
+    @Autowired
+    private UserRepository userRepository;
+
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.inMemoryAuthentication().withUser("admin").password("admin").roles("ADMIN");
+        auth.userDetailsService(new UserDetailsServiceAdapter(userRepository, new SimpleUserDetailsDialect()));
     }
 
     @Bean

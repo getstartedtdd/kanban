@@ -50,7 +50,7 @@ public class ThikiServer implements Endpoint {
 
 
     public void assertAccessTokenCreated() throws Exception {
-        result.andExpect(jsonPath("access_token").exists()).andDo(new ResultHandler() {
+        result.andDo(print()).andExpect(jsonPath("access_token").exists()).andDo(new ResultHandler() {
             @Override
             public void handle(MvcResult result) throws Exception {
                 String content = result.getResponse().getContentAsString();

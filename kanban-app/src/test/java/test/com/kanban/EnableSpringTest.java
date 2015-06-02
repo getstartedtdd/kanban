@@ -1,7 +1,7 @@
 package test.com.kanban;
 
-import com.kanban.config.WebConfiguration;
-import com.kanban.config.WebSecurityConfig;
+import com.kanban.config.WebMvcConfig;
+import com.kanban.config.ApplicationConfig;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ContextConfiguration;
@@ -21,7 +21,7 @@ import java.lang.annotation.Target;
 @WebAppConfiguration
 public @interface EnableSpringTest {
     @Configuration
-    @Import({WebConfiguration.class, WebSecurityConfig.class})
+    @Import({WebMvcConfig.class, ApplicationConfig.class})
     public static class Config {
 
     }

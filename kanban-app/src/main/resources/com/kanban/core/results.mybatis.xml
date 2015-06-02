@@ -1,0 +1,17 @@
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="results">
+    <resultMap id="role" type="com.kanban.core.Role">
+        <constructor>
+            <arg column="id" javaType="int" />
+            <arg column="name" javaType="string"/>
+        </constructor>
+    </resultMap>
+    <resultMap id="user" type="com.kanban.core.User" autoMapping="true">
+        <collection property="roles" select="results.loadUserRoles" column="id"/>
+    </resultMap>
+    <select id="loadUserRoles" resultMap="results.role">
+        select roles.id,roles.name from user_roles,roles where role_id=roles.id and  user_id= #{user_id}
+    </select>
+</mapper>
