@@ -4,14 +4,23 @@
 <mapper namespace="results">
     <resultMap id="role" type="com.kanban.core.Role">
         <constructor>
-            <arg column="id" javaType="int" />
+            <idArg column="id" javaType="int" />
             <arg column="name" javaType="string"/>
         </constructor>
+        <id property="id" column="id"/>
     </resultMap>
     <resultMap id="user" type="com.kanban.core.User" autoMapping="true">
+        <id property="id" column="id"/>
+        <result property="clientId" column="client_id"/>
+        <result property="clientSecret" column="client_secret"/>
+        <result property="resourceIds" column="resource_ids" javaType="java.util.Set" jdbcType="VARCHAR"/>
+        <result property="scopes" column="scopes" javaType="java.util.Set" jdbcType="VARCHAR"/>
+        <result property="grantedTypes" column="granted_types" javaType="java.util.Set" jdbcType="VARCHAR"/>
         <collection property="roles" select="results.loadUserRoles" column="id"/>
     </resultMap>
     <select id="loadUserRoles" resultMap="results.role">
-        select roles.id,roles.name from user_roles,roles where role_id=roles.id and  user_id= #{user_id}
+        SELECT roles.id,roles.name
+        FROM user_roles, roles
+        WHERE role_id = roles.id AND user_id = #{user_id}
     </select>
 </mapper>

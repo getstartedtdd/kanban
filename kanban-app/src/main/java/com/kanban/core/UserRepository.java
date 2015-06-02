@@ -12,4 +12,8 @@ public interface UserRepository {
     @ResultMap("results.user")
     @Select("select * from users where username=#{username}")
     User findUserByUsername(String username);
+
+    @ResultMap("results.user")
+    @Select("select * from users where client_id=#{clientId}")
+    User findUserByClientId(String clientId);
 }

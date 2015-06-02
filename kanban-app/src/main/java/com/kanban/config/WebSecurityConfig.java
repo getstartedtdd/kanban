@@ -1,7 +1,9 @@
 package com.kanban.config;
 
 import com.kanban.core.UserRepository;
-import com.kanban.spring.security.SimpleUserDetailsDialect;
+import com.kanban.spring.security.ClientDetailsDialect;
+import com.kanban.spring.security.ClientDetailsServiceAdapter;
+import com.kanban.spring.security.UserDialects;
 import com.kanban.spring.security.UserDetailsServiceAdapter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -31,13 +33,18 @@ import org.springframework.security.oauth2.provider.token.store.InMemoryTokenSto
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     public static final String RESOURCE_ID = "kanban";
+    private UserDialects userDialects = new UserDialects();
     @Autowired
     private UserRepository userRepository;
 
+    @Bean
+    public UserDialects userDialects() {
+        return new UserDialects();
+    }
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(new UserDetailsServiceAdapter(userRepository, new SimpleUserDetailsDialect()));
+        auth.userDetailsService(new UserDetailsServiceAdapter(userRepository, userDialects));
     }
 
     @Bean
@@ -71,6 +78,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         private TokenStore tokenStore;
         @Autowired
         private AuthenticationManager authenticationManager;
+        @Autowired
+        private UserRepository userRepository;
+        @Autowired
+        private ClientDetailsDialect clientDetailsDialect;
 
         public void configure(AuthorizationServerSecurityConfigurer security) throws Exception {
             security.allowFormAuthenticationForClients();
@@ -83,14 +94,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
         @Override
         public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
-            clients.inMemory()
-                    .withClient("kanban")
-                    .authorizedGrantTypes("password", "refresh_token", "client_credentials")
-                    .authorities("ROLE_ADMIN")
-                    .scopes("read", "write")
-                    .resourceIds(RESOURCE_ID)
-                    .secret("123456")
-                    .accessTokenValiditySeconds(20);
+            clients.withClientDetails(new ClientDetailsServiceAdapter(userRepository, clientDetailsDialect));
         }
 
         @Bean
