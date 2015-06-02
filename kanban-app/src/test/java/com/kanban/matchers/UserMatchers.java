@@ -2,9 +2,7 @@ package com.kanban.matchers;
 
 import org.hamcrest.Matcher;
 
-import static org.hamcrest.Matchers.equalTo;
-import static org.hamcrest.Matchers.hasItem;
-import static org.hamcrest.Matchers.hasProperty;
+import static org.hamcrest.Matchers.*;
 
 /**
  * Created by L.x on 15-6-2.

@@ -28,7 +28,7 @@ public class RestfulResourceSecurityTest {
 
     @Test
     public void listAllUsersForTrustClient() throws Exception {
-        client.loginAs("admin", "admin");
+        client.loginAs("kanban", "123456");
         server.assertAccessTokenCreated();
 
         client.listAllUsers();
@@ -37,7 +37,7 @@ public class RestfulResourceSecurityTest {
 
     @Test
     public void reportErrorToClientWithBadCredentials() throws Exception {
-        client.loginAs("bad_username", "bad_password");
+        client.loginAs("<bad_client>", "<bad_secret_key>");
         server.assertABadCredentialMessageSent();
 
         client.listAllUsers();
@@ -46,7 +46,7 @@ public class RestfulResourceSecurityTest {
 
     @Test
     public void reportErrorToClientWhenAccessTokenWasExpired() throws Exception {
-        client.loginAs("admin", "admin");
+        client.loginAs("kanban", "123456");
         server.assertAccessTokenCreated();
 
         server.whenAccessTokenExpired();

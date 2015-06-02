@@ -10,8 +10,8 @@ public class ThikiClient {
         this.endpoint = endpoint;
     }
 
-    public void loginAs(final String username, final String password) throws Exception {
-        endpoint.login(username, password);
+    public void loginAs(String clientId, String secretKey) throws Exception {
+        endpoint.login(clientId, secretKey);
     }
 
     public void listAllUsers() throws Exception {

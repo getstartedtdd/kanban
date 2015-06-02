@@ -58,7 +58,7 @@ public class ThikiServer implements Endpoint {
     }
 
     public void assertReturnedAllUsers() throws Exception {
-        result.andExpect(jsonPath("$").isArray());
+        result.andDo(print()).andExpect(jsonPath("$").isArray());
     }
 
     public void assertAnUnauthorizedMessageSent() throws Exception {
@@ -66,7 +66,7 @@ public class ThikiServer implements Endpoint {
     }
 
     public void assertABadCredentialMessageSent() throws Exception {
-        assertFailingOn(OAuth2Exception.INVALID_GRANT);
+        assertFailingOn(OAuth2Exception.INVALID_CLIENT);
     }
 
     public void whenAccessTokenExpired() {
@@ -85,15 +85,15 @@ public class ThikiServer implements Endpoint {
     }
 
     public void assertAnAccessTokenExpiredMessageSent() throws Exception {
-        assertFailingOn(OAuth2Exception.INVALID_TOKEN,containsString("Access token expired"));
+        assertFailingOn(OAuth2Exception.INVALID_TOKEN, containsString("Access token expired"));
     }
 
     private void assertFailingOn(String error, Matcher<String>... descriptionMatchers) throws Exception {
-        result.andExpect(jsonPath("error").value(error)).andExpect(jsonPath("error_description").value(allOf(descriptionMatchers)));
+        result.andDo(print()).andExpect(jsonPath("error").value(error)).andExpect(jsonPath("error_description").value(allOf(descriptionMatchers)));
     }
 
-    public void login(String username, String password) throws Exception {
-        result = mvc.perform(post(String.format("/oauth/token?username=%s&password=%s&grant_type=password&client_id=kanban&client_secret=123456", username, password)));
+    public void login(String clientId, String secretKey) throws Exception {
+        result = mvc.perform(post(String.format("/oauth/token?client_id=%s&client_secret=%s&grant_type=client_credentials", clientId, secretKey)));
     }
 
     @Override

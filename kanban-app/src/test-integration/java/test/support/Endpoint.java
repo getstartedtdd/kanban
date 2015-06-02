@@ -6,5 +6,5 @@ package test.support;
 public interface Endpoint {
     void get(String uri) throws Exception;
 
-    void login(String username, String password) throws Exception;
+    void login(String clientId, String secretKey) throws Exception;
 }

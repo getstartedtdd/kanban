@@ -59,7 +59,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         public void configure(HttpSecurity http) throws Exception {
             http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS).and()
                     .httpBasic().disable()
-                    .authorizeRequests().antMatchers("/users/**").authenticated();
+                    .authorizeRequests().antMatchers("/users/**").hasRole("ADMIN");
         }
 
     }

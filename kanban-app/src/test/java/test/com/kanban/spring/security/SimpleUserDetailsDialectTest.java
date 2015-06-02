@@ -2,7 +2,6 @@ package test.com.kanban.spring.security;
 
 import com.kanban.core.Role;
 import com.kanban.core.User;
-import com.kanban.matchers.UserMatchers;
 import com.kanban.spring.security.SimpleUserDetailsDialect;
 import org.hamcrest.Matcher;
 import org.junit.Test;
@@ -17,7 +16,7 @@ import static com.kanban.matchers.UserMatchers.password;
 import static com.kanban.matchers.UserMatchers.username;
 import static com.kanban.spring.security.SimpleUserDetailsDialect.grant;
 import static org.hamcrest.Matchers.*;
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertThat;
 
 public class SimpleUserDetailsDialectTest {
 
