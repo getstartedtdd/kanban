@@ -35,4 +35,19 @@
         </repository>
     </repositories>
 
+    <profiles>
+        <profile>
+            <id>dev</id>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <properties>
+                <jdbc.user>root</jdbc.user>
+                <jdbc.password>root</jdbc.password>
+                <jdbc.url>
+                    <![CDATA[jdbc:mysql://localhost/thiki_test?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true]]>
+                </jdbc.url>
+            </properties>
+        </profile>
+    </profiles>
 </project>
