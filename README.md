@@ -29,9 +29,9 @@
 
 1.  在使用项目之前确保你已安装如下软件:
 
-![Maven](http://maven.apache.org/images/maven-logo-black-on-white.png) | ![NodeJs](http://images.51cto.com/files/uploadimg/20121108/1001291.jpg)  | ![MySQL](http://dev.mysql.com/common/logos/logo-mysql-110x57.png)
----------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------
-[Maven](http://maven.apache.org/download.cgi)                          | [NodeJs](https://nodejs.org/download/)                                   | [MySQL](http://dev.mysql.com/downloads/windows/installer/)
+![Maven](http://maven.apache.org/images/maven-logo-black-on-white.png) | ![NodeJs](http://images.51cto.com/files/uploadimg/20121108/1001291.jpg)  | ![MySQL](http://dev.mysql.com/common/logos/logo-mysql-110x57.png)        | ![Git](http://git-scm.com/images/logo@2x.png)
+---------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------ | ------------------------------------------------------------------------
+[Maven](http://maven.apache.org/download.cgi)                          | [NodeJs](https://nodejs.org/download/)                                   | [MySQL](http://dev.mysql.com/downloads/windows/installer/)               | [Git](http://git-scm.com/download)
 
 
 2.  安装less,bower,grunt
