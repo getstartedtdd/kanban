@@ -45,7 +45,7 @@
 3.  下载项目到本地
 
      ```cmd
-     git clone https://github.com/get-started-tdd/kanban-bootstrap.git
+     git clone https://github.com/getstartedtdd/kanban.git
      ```
 
 4.  进入到项目根目录,运行如下命令:
