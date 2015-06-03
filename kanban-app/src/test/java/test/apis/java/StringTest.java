@@ -1,4 +1,4 @@
-package test.apis.spring;
+package test.apis.java;
 
 import org.junit.Test;
 

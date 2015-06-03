@@ -35,7 +35,7 @@ public class ClientDetailsServiceAdapterTest {
     }
 
     @Test
-    public void returnClientDetailsWhenUserFound() throws Exception {
+    public void returnClientDetailsIfUserFound() throws Exception {
         final ClientDetails expected = context.mock(ClientDetails.class);
         final User user = new User();
         expectUserFoundAs(user);

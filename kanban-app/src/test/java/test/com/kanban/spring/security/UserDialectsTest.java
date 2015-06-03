@@ -49,7 +49,7 @@ public class UserDialectsTest {
     }
 
     @Test
-    public void toUserDetails() throws Exception {
+    public void convertUserToUserDetails() throws Exception {
         UserDetails userDetails = dialects.toUserDetails(anUser);
 
         assertThat(userDetails, username(equalTo("zhangsan")));
@@ -58,7 +58,7 @@ public class UserDialectsTest {
     }
 
     @Test
-    public void toClientDetails() throws Exception {
+    public void convertUserToClientDetails() throws Exception {
         ClientDetails userDetails = dialects.toClientDetails(anUser);
 
         assertThat(userDetails, clientId(equalTo("a_client")));
