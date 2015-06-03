@@ -38,22 +38,14 @@
         <spring.version>4.1.5.RELEASE</spring.version>
         <spring-security.version>4.0.0.RELEASE</spring-security.version>
         <mysql.driver.version>5.1.21</mysql.driver.version>
+
+        <jdbc.user>root</jdbc.user>
+        <jdbc.password>root</jdbc.password>
+        <jdbc.url>
+            <![CDATA[jdbc:mysql://localhost/thiki_test?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true]]>
+        </jdbc.url>
     </properties>
-    <profiles>
-        <profile>
-            <id>dev</id>
-            <activation>
-                <activeByDefault>true</activeByDefault>
-            </activation>
-            <properties>
-                <jdbc.user>root</jdbc.user>
-                <jdbc.password>root</jdbc.password>
-                <jdbc.url>
-                    <![CDATA[jdbc:mysql://localhost/thiki_test?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true]]>
-                </jdbc.url>
-            </properties>
-        </profile>
-    </profiles>
+
     <dependencyManagement>
         <dependencies>
             <dependency>

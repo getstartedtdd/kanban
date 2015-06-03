@@ -51,6 +51,7 @@
 4.  进入到项目根目录,运行如下命令:
 
     ```cmd
+        mvn install -P bootstrap ##前端开发人员无需运行该命令来初始化项目
         cd kanban-resources
         npm install
         bower install
