@@ -28,6 +28,9 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 import org.springframework.security.oauth2.provider.token.DefaultTokenServices;
 import org.springframework.security.oauth2.provider.token.TokenStore;
 import org.springframework.security.oauth2.provider.token.store.InMemoryTokenStore;
+import org.springframework.security.oauth2.provider.token.store.JdbcTokenStore;
+
+import javax.sql.DataSource;
 
 /**
  * Created by L.x on 15-6-2.
@@ -109,8 +112,8 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
         }
 
         @Bean
-        public TokenStore tokenStore() {
-            return new InMemoryTokenStore();
+        public TokenStore tokenStore(DataSource dataSource) {
+            return new JdbcTokenStore(dataSource);
         }
     }
 }

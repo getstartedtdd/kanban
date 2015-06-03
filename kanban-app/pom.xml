@@ -206,8 +206,7 @@
                             <execution>
                                 <phase>initialize</phase>
                                 <goals>
-                                    <goal>create</goal>
-                                    <goal>migrate</goal>
+                                    <goal>reset</goal>
                                 </goals>
                             </execution>
                         </executions>
