@@ -158,12 +158,6 @@
             <plugin>
                 <groupId>com.carbonfive.db-support</groupId>
                 <artifactId>db-migration-maven-plugin</artifactId>
-                <configuration>
-                    <url>${jdbc.url}</url>
-                    <username>${jdbc.user}</username>
-                    <password>${jdbc.password}</password>
-                    <migrationsPath>../db/migrations</migrationsPath>
-                </configuration>
             </plugin>
 
             <plugin>
@@ -185,6 +179,20 @@
                 </executions>
             </plugin>
         </plugins>
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>com.carbonfive.db-support</groupId>
+                    <artifactId>db-migration-maven-plugin</artifactId>
+                    <configuration>
+                        <url>${jdbc.url}</url>
+                        <username>${jdbc.user}</username>
+                        <password>${jdbc.password}</password>
+                        <migrationsPath>../db/migrations</migrationsPath>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
     </build>
     <profiles>
         <profile>
@@ -194,12 +202,6 @@
                     <plugin>
                         <groupId>com.carbonfive.db-support</groupId>
                         <artifactId>db-migration-maven-plugin</artifactId>
-                        <configuration>
-                            <url>${jdbc.url}</url>
-                            <username>${jdbc.user}</username>
-                            <password>${jdbc.password}</password>
-                            <migrationsPath>../db/migrations</migrationsPath>
-                        </configuration>
                         <executions>
                             <execution>
                                 <phase>initialize</phase>
