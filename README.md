@@ -32,7 +32,6 @@
 ![Maven](http://maven.apache.org/images/maven-logo-black-on-white.png)      | ![NodeJs](http://images.51cto.com/files/uploadimg/20121108/1001291.jpg)    | ![MySQL](http://dev.mysql.com/common/logos/logo-mysql-110x57.png)         | ![Git](http://git-scm.com/images/logo@2x.png)
 ----------------------------------------------------------------------------| ------------------------------------------------------------------------   | ------------------------------------------------------------------------  | ------------------------------------------------------------------------
 [Maven](http://maven.apache.org/download.cgi)                               | [NodeJs](https://nodejs.org/download/)                                     | [MySQL](http://dev.mysql.com/downloads/windows/installer/)                | [Git](http://git-scm.com/download)
-----------------------------------------------------------------------------| ------------------------------------------------------------------------   | ------------------------------------------------------------------------  | ------------------------------------------------------------------------
 [安装教程](http://jingyan.baidu.com/article/d8072ac45d3660ec94cefd51.html)　 | [安装教程](http://jingyan.baidu.com/article/a948d6515d4c850a2dcd2e18.html) | [安装教程](http://jingyan.baidu.com/article/48b558e37c20e77f38c09a16.html) | [安装教程](http://jingyan.baidu.com/article/90895e0fb3495f64ed6b0b50.html)
 
 
