@@ -29,29 +29,34 @@
 
 1.  在使用项目之前确保你已安装如下软件:
 
-![Maven](http://maven.apache.org/images/maven-logo-black-on-white.png) | ![NodeJs](http://images.51cto.com/files/uploadimg/20121108/1001291.jpg)
----------------------------------------------------------------------- | ------------------------------------------------------------------------
-[Maven](http://maven.apache.org/download.cgi)                          | [NodeJs](https://nodejs.org/download/)
+![Maven](http://maven.apache.org/images/maven-logo-black-on-white.png) | ![NodeJs](http://images.51cto.com/files/uploadimg/20121108/1001291.jpg)  | ![MySQL](http://dev.mysql.com/common/logos/logo-mysql-110x57.png)
+---------------------------------------------------------------------- | ------------------------------------------------------------------------ | ------------------------------------------------------------------------
+[Maven](http://maven.apache.org/download.cgi)                          | [NodeJs](https://nodejs.org/download/)                                   | [MySQL](http://dev.mysql.com/downloads/windows/installer/)
 
 
 2.  安装less,bower,grunt
 
     ```cmd
-    npm install -g less
-    npm install -g bower
-    npm install -g grunt
+        npm install -g less
+        npm install -g bower
+        npm install -g grunt
     ```
 
 3.  下载项目到本地
 
      ```cmd
-     git clone https://github.com/getstartedtdd/kanban.git
+        git clone https://github.com/getstartedtdd/kanban.git
      ```
 
-4.  进入到项目根目录,运行如下命令:
+4.  安装本地MySQL数据库,用户名：root;密码:root。进入到项目根目录，运行如下命令（前端开发人员可以跳过该安装）。
 
     ```cmd
         mvn install -P bootstrap ##前端开发人员无需运行该命令来初始化项目
+    ```
+
+5.  进入到项目根目录,运行如下命令:
+
+    ```cmd
         cd kanban-resources
         npm install
         bower install
@@ -65,17 +70,17 @@
 ### 前端开发人员
 
 ```
-cd kanban-resources
-grunt less:dev
-grunt watch:dev
+    cd kanban-resources
+    grunt less:dev
+    grunt watch:dev
 ```
 
 ### 后端开发人员
 
 ```
-cd kanban-resources
-grunt less:war
-grunt watch:war
+    cd kanban-resources
+    grunt less:war
+    grunt watch:war
 ```
 
 ## 涉及的技术
