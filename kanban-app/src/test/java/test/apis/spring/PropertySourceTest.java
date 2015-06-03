@@ -26,6 +26,7 @@ public class PropertySourceTest {
     private Config config;
 
     @Configuration
+    @PropertySource("classpath:test.properties")
     public static class Config {
         @Value("${foo}")
         public String foo;
@@ -34,14 +35,9 @@ public class PropertySourceTest {
         @Value("${unknown:default}")
         public String defaultValueOnMissing;
 
-
-        @Configuration
-        @PropertySource("classpath:test.properties")
-        public static class PropertySourceConfig {
-            @Bean
-            public PlaceholderConfigurerSupport placeholderConfigurer() {
-                return new PropertySourcesPlaceholderConfigurer();
-            }
+        @Bean
+        public static PlaceholderConfigurerSupport placeholderConfigurer() {
+            return new PropertySourcesPlaceholderConfigurer();
         }
     }
 
