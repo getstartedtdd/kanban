@@ -2,14 +2,21 @@
 
 ## 项目目录结构
 ```
+├─db
+│  └─migrations 数据库脚本
+│
 ├─kanban-app 看板后端开发根目录
 │  └─src
 │      ├─main
 │      │  ├─java        后端源码目录
 │      │  ├─resources   后端资源
 │      │  └─webapp      后端网站根目录
-│      └─test
-│          └─java       测试源码目录
+│      ├─test
+│      │  ├─java        单元测试源码目录
+│      │  └─resources   单元测试资源文件目录
+│      └─test-integration
+│          └─java       集成测试源码目录
+│          └─resources  集成测试资源文件目录
 │
 └─kanban-resources  看板前端开发根目录
     ├─js    前端js源码目录
