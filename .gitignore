@@ -2,3 +2,11 @@
 *.iml
 target
 node_modules
+kanban-app/.settings/org.eclipse.jdt.core.prefs
+kanban-app/.settings/org.eclipse.m2e.core.prefs
+kanban-app/.settings/org.eclipse.wst.validation.prefs
+.settings/org.eclipse.core.resources.prefs
+.settings/org.eclipse.m2e.core.prefs
+kanban-resources/.project
+kanban-resources/.settings/org.eclipse.core.resources.prefs
+kanban-resources/.settings/org.eclipse.m2e.core.prefs

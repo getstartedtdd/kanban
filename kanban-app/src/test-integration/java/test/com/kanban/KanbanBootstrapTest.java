@@ -8,6 +8,7 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.hamcrest.Matcher;
 import org.junit.After;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.mortbay.jetty.Server;
 import org.mortbay.jetty.webapp.WebAppContext;
@@ -47,6 +48,7 @@ public class KanbanBootstrapTest {
         server.stop();
     }
 
+    @Ignore
     @Test
     public void checkingPreparation() throws Exception {
         AlertSpy alert = new AlertSpy();
