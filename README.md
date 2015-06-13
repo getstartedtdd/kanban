@@ -53,8 +53,8 @@
 
     ```cmd
         cd kanban-resources
-        npm install
-        bower install
+        npm install ##在nodejs依赖包发生变化时需要再次执行该命令，下载依赖包
+        bower install  ##在bower依赖包发生变化时需要再次执行该命令，下载依赖包
     ```
 
 4.  安装本地MySQL数据库,用户名：root;密码:root。进入到项目根目录，运行如下命令（前端开发人员可以跳过该安装）。
