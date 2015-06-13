@@ -48,7 +48,6 @@ public class KanbanBootstrapTest {
         server.stop();
     }
 
-    @Ignore
     @Test
     public void checkingPreparation() throws Exception {
         AlertSpy alert = new AlertSpy();

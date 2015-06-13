@@ -49,19 +49,21 @@
         git clone https://github.com/getstartedtdd/kanban.git
      ```
 
-3.  安装本地MySQL数据库,用户名：root;密码:root。进入到项目根目录，运行如下命令（前端开发人员可以跳过该安装）。
-
-    ```cmd
-        mvn install -P bootstrap ##前端开发人员无需运行该命令来初始化项目
-    ```
-
-4.  进入到项目根目录,运行如下命令:
+3.  进入到项目根目录,运行如下命令:
 
     ```cmd
         cd kanban-resources
         npm install
         bower install
     ```
+
+4.  安装本地MySQL数据库,用户名：root;密码:root。进入到项目根目录，运行如下命令（前端开发人员可以跳过该安装）。
+
+    ```cmd
+        mvn install -P bootstrap ##前端开发人员无需运行该命令来初始化项目
+    ```
+
+
 
 ##使用
 
