@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+    <!-- 数据库连接环境配置 -->
+    <!-- 数据库连接环境配置 -->
+    <environments default="development">
+        <environment id="development">
+            <!-- JDBC – 这个配置直接简单使用了 JDBC 的提交和回滚设置。 它依赖于从数据源得 到的连接来管理事务范围。 -->
+            <transactionManager type="JDBC"/>
+            <!-- MANAGED – 这个配置几乎没做什么。它从来不提交或回滚一个连接。 而它会让 容器来管理事务的整个生命周期(比如 Spring
+                或 JEE 应用服务器的上下文) 默认 情况下它会关闭连接。 然而一些容器并不希望这样, 因此如果你需要从连接中停止 它,将 closeConnection
+                属性设置为 false。
+                <transactionManager type="MANAGED"> <property name="closeConnection"
+                value="false" />
+                </transactionManager>
+            -->
+            <!-- UNPOOLED – 这个数据源的实现是每次被请求时简单打开和关闭连接。
+            POOLED – 这是 JDBC 连接对象的数据源连接池的实现,用来避免创建新的连接实例 时必要的初始连接和认证时间。这是一种当前 Web 应用程序用来快速响应请求很流行的方 法。
+            JNDI – 这个数据源的实现是为了使用如 Spring 或应用服务器这类的容器, 容器可以集 中或在外部配置数据源,然后放置一个 JNDI 上下文的引用。
+             -->
+            <dataSource type="POOLED">
+                <property name="driver" value="${jdbc.driverClassName}"/>
+                <property name="url" value="${jdbc.url}"/>
+                <property name="username" value="${jdbc.user}"/>
+                <property name="password" value="${jdbc.password}"/>
+            </dataSource>
+        </environment>
+    </environments>
+
+    <!-- 多数据库配置 通过 databaseId 匹配 -->
+    <databaseIdProvider type="DB_VENDOR">
+        <property name="MySQL" value="mysql"/>
+    </databaseIdProvider>
+    <mappers>
+        <mapper resource="mapper/users.xml"/>
+    </mappers>
+</configuration>

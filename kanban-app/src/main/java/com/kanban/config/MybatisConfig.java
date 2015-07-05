@@ -6,7 +6,6 @@ import com.mysql.jdbc.jdbc2.optional.MysqlDataSource;
 import org.apache.ibatis.type.TypeHandler;
 import org.mybatis.spring.SqlSessionFactoryBean;
 import org.mybatis.spring.mapper.MapperScannerConfigurer;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.core.Ordered;
@@ -24,10 +23,7 @@ import static org.springframework.util.ClassUtils.getPackageName;
  */
 @Configuration
 @Import({MybatisConfig.DataSourceConfig.class, MybatisConfig.MapperScannerConfig.class})
-@Order(Ordered.HIGHEST_PRECEDENCE)
 public class MybatisConfig {
-
-
     @PropertySource("classpath:jdbc.properties")
     public static class DataSourceConfig {
         @Value("${jdbc.user}")
@@ -47,13 +43,12 @@ public class MybatisConfig {
         }
     }
 
-
     @Bean
     @Lazy
-    public SqlSessionFactoryBean sessionFactory(final DataSource dataSource,final ResourcePatternResolver resourceResolver) throws IOException {
+    public SqlSessionFactoryBean sessionFactory(final DataSource dataSource, final ResourcePatternResolver resourceResolver) throws IOException {
         return new SqlSessionFactoryBean() {{
             setDataSource(dataSource);
-            setMapperLocations(resourceResolver.getResources("classpath:com/kanban/core/**.mybatis.xml"));
+            setMapperLocations(resourceResolver.getResources("classpath:com/kanban/**/*.mybatis.xml"));
             setTypeHandlers(new TypeHandler[]{new SetTypeHandler()});
         }};
     }
@@ -65,10 +60,8 @@ public class MybatisConfig {
             return new MapperScannerConfigurer() {{
                 setSqlSessionFactoryBeanName("sessionFactory");
                 setAnnotationClass(Repository.class);
-                setBasePackage(getPackageName(UserRepository.class));
+                setBasePackage(getPackageName("com.kanban"));
             }};
         }
     }
-
-
 }
