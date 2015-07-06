@@ -17,5 +17,4 @@ public class UserController {
     public List list() {
         return Collections.emptyList();
     }
-
 }

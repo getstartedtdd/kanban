@@ -37,6 +37,16 @@ public class User {
         return roles;
     }
 
+    private String email;
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
     public void setRoles(List<Role> roles) {
         this.roles = roles;
     }
@@ -87,5 +97,21 @@ public class User {
 
     public void setGrantedTypes(Set<String> grantedTypes) {
         this.grantedTypes = grantedTypes;
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "username='" + username + '\'' +
+                ", password='" + password + '\'' +
+                ", clientId='" + clientId + '\'' +
+                ", clientSecret='" + clientSecret + '\'' +
+                ", resourceIds=" + resourceIds +
+                ", scopes=" + scopes +
+                ", grantedTypes=" + grantedTypes +
+                ", id=" + id +
+                ", roles=" + roles +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
