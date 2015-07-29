@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>cn</groupId>
+		<artifactId>thiki</artifactId>
+		<version>1.0.0</version>
+	</parent>
+
+	<artifactId>thiki-war</artifactId>
+	<packaging>war</packaging>
+	<name>thiki War</name>
+
+	<dependencies>
+		<!-- thiki-war web begin -->
+		<dependency>
+			<groupId>cn</groupId>
+			<artifactId>thiki-web</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>cn</groupId>
+					<artifactId>thiki-dmo</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<!--  thiki-war  web end -->
+	</dependencies>
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>unpack</id>
+						<phase>generate-resources</phase>
+						<goals>
+							<goal>unpack</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>cn</groupId>
+									<artifactId>thiki-dmo</artifactId>
+									<version>${thiki.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${basedir}/target/classes</outputDirectory>
+									<includes>**/*.class,**/*.xml</includes>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+		</plugins>
+	</build>
+</project>

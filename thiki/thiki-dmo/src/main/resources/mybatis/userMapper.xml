@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.thiki.dao.UserDao">
+
+	<!-- 查询结果对象 -->
+	<resultMap id="userRM" type="cn.thiki.dmo.User">
+		<id property="id" column="id" />
+		<result property="username" column="username" />
+		<result property="password" column="password" />
+		<result property="email" column="email" />
+		<result property="clientId" column="client_id" />
+		<result property="resourceIds" column="resource_ids" />
+		<result property="scopes" column="scopes" />
+		<result property="grantedTypes" column="granted_types" />
+	</resultMap>
+
+	<!-- insert column -->
+	<sql id="sqlinsertColumn">
+		username,
+		password,
+		email,
+		client_id,
+		resource_ids,
+		scopes,
+		granted_types
+    </sql>
+
+	<!-- insert column -->
+	<sql id="sqlqueryColumn">
+		id,
+		username,
+		password,
+		email,
+		client_id,
+		resource_ids,
+		scopes,
+		granted_types
+    </sql>
+
+	<!-- insert -->
+	<insert id="insert" parameterType="cn.thiki.dmo.User"
+		useGeneratedKeys="true" keyProperty="id">
+		insert into users
+		(
+		<include refid="sqlinsertColumn" />
+		) values(
+		#{userName},
+		#{password},
+		#{email},
+		#{clientId},
+		#{resourceIds},
+		#{scopes},
+		#{grantedTypes}
+		)
+	</insert>
+
+	<!-- 查询 -->
+	<select id="queryByObject" parameterType="cn.thiki.dmo.User"
+		resultType="cn.thiki.dmo.User">
+		select
+		<include refid="sqlqueryColumn" />
+		from user
+		where 1=1
+		<include refid="sqlConditions" />
+	</select>
+
+	<!-- 查询根据用户名查询 -->
+	<select id="queryByuserName" parameterType="java.lang.String"
+		resultType="cn.thiki.dmo.User">
+		select
+		<include refid="sqlqueryColumn" />
+		from user
+		where username = #{username}
+	</select>
+	
+	<!-- 查询条件 -->
+	<sql id="sqlConditions">
+		<if test="id != null and '' != id">
+			 <![CDATA[  
+				AND id = #{id}
+				]]>
+		</if>
+		<if test="username != null and '' != username">
+			 <![CDATA[  
+				AND username = #{username}
+				]]>
+		</if>
+	</sql>
+</mapper>

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE jetty:configuration SYSTEM "jetty-config.dtd">
+<Configure id="webApp" class="org.eclipse.jetty.webapp.WebAppContext">
+	<!-- 上下文名称 -->
+	<Set name="contextPath">/thiki</Set>
+	
+	<New id="dataSource" class="org.eclipse.jetty.plus.jndi.Resource">
+		<Arg>jdbc/thiki</Arg>
+		<Arg>
+			<New class="org.apache.commons.dbcp.BasicDataSource">
+				<Set name="driverClassName">com.mysql.jdbc.Driver</Set>
+				<Set name="url">jdbc:mysql://127.0.0.1:3306/huxm?zeroDateTimeBehavior=convertToNull
+	
+				</Set>
+				<Set name="username">root</Set>
+				<Set name="password">root</Set>
+			</New>
+		</Arg>
+	</New>
+</Configure>

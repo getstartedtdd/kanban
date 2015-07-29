@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:ssf="http://code.suning.com/schema/ssf" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-2.5.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-2.5.xsd
+http://code.suning.com/schema/ssf http://code.suning.com/schema/ssf/ssf.xsd"
+	default-autowire="byName">
+
+	<!-- 此应用的信息 instId每个节点需不同-dynamic:底层去根据机器名来封装此参数值 uri为当前系统的标识的URI地址-不可为空 
+		organazation为当前系统的唯一别名-不可为空 instid取实例名，或者用去脚本的配置参数 一台主机部署多个相同的应用时！！JVM脚本配置？ -->
+	<!-- 
+	<ssf:application uri="${ssf.local.addr}"
+		organization="${ssf.local.org}" desc="$[ssf.local.desc]" logpath="/opt/epp/log/epps-pgb/"
+		logtype="slf4j" />
+		 -->
+	<!-- 使用组播方式发现注册中心 ,如果是本地注册中心使用:local表示 ，一个容器只能有一个reskeeper 
+	<ssf:reskeeper address="$[reskeeper.address]" />
+	<ssf:reference id="rcsServer" uri="${rcs.ssf.server.uri}" />
+	-->
+	<!-- 每个服务方只有一个service标签,且每个uri(服务方)中的cmdCode需唯一, 第一个版本暂时只有对整个服务方的参数设置，无法精确到每个类每个方法 -->
+	<!-- <ssf:service id="ssfService" version="1.0" port="28818"> -->
+	<!-- <ssf:mappings> -->
+	<!-- <ssf:mapping class="com.suning.demo.service.intf.DecodeService" ref="decodeService"> -->
+	<!-- <ssf:map cmdcode="decode" method="fmtDecode" /> -->
+	<!-- </ssf:mapping> -->
+	<!-- </ssf:mappings> -->
+	<!-- </ssf:service> -->
+	
+	<ssf:application uri="ssf100://pgb.epp.suning.com/"                            
+		organization="epps-pgb" desc="网关管理平台" logpath="/opt/logs/epps/epps-pgb/"
+		logtype="slf4j">
+		<ssf:parameter key="epps.pgb.task.time.out" value="5000" />
+		<ssf:parameter key="shutdown.timeout" value="5000" />
+	</ssf:application>
+
+ 
+	<ssf:reskeeper address="10.27.18.3:5050,10.27.18.7:5050" />
+ 	<!--	
+	<ssf:reskeeper address="10.19.221.112:5050" />
+	-->
+	<!-- epps-rcs -->
+	<ssf:reference id="eppsRcsService" uri="ssf100://rcs.epp.suning.com/" timeout="15000"/>
+	
+	<!-- 合同服务 -->
+	<ssf:reference id="cmsService" uri="ssf100://cms.epp.suning.com/" timeout="15000"/>
+	<!-- 支付收单 -->
+	<ssf:reference id="pasService" uri="ssf100://pas.epp.suning.com/" timeout="15000"/>
+	
+</beans>
