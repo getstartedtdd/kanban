@@ -15,44 +15,8 @@
 		<!-- thiki-war web begin -->
 		<dependency>
 			<groupId>cn</groupId>
-			<artifactId>thiki-web</artifactId>
-			<exclusions>
-				<exclusion>
-					<groupId>cn</groupId>
-					<artifactId>thiki-dmo</artifactId>
-				</exclusion>
-			</exclusions>
+			<artifactId>thiki-biz</artifactId>
 		</dependency>
 		<!--  thiki-war  web end -->
 	</dependencies>
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-dependency-plugin</artifactId>
-				<executions>
-					<execution>
-						<id>unpack</id>
-						<phase>generate-resources</phase>
-						<goals>
-							<goal>unpack</goal>
-						</goals>
-						<configuration>
-							<artifactItems>
-								<artifactItem>
-									<groupId>cn</groupId>
-									<artifactId>thiki-dmo</artifactId>
-									<version>${thiki.version}</version>
-									<type>jar</type>
-									<overWrite>true</overWrite>
-									<outputDirectory>${basedir}/target/classes</outputDirectory>
-									<includes>**/*.class,**/*.xml</includes>
-								</artifactItem>
-							</artifactItems>
-						</configuration>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>

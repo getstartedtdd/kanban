@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>  
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"   
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.thiki.core.endpoint.dao.MybatisTokenDao">
+	<resultMap id="accessToken"
+		type="cn.thiki.core.endpoint.entity.MybatisOauth2AccessToken">
+		<result property="tokenId" column="token_id" />
+		<result property="token" column="token" />
+		<result property="authenticationId" column="authentication_id" />
+		<result property="authentication" column="authentication" />
+		<result property="refreshToken" column="refresh_token" />
+	</resultMap>
+	<resultMap id="refreshToken"
+		type="cn.thiki.core.endpoint.entity.MybatisOauth2RefreshToken">
+		<result property="tokenId" column="token_id" />
+		<result property="token" column="token" />
+		<result property="authentication" column="authentication" />
+	</resultMap>
+	<resultMap id="code" type="cn.thiki.core.endpoint.entity.MybatisOauth2Code">
+		<result property="code" column="code" />
+		<result property="authentication" column="authentication" />
+	</resultMap>
+
+
+	<insert id="storeAccessToken"
+		parameterType="cn.thiki.core.endpoint.entity.MybatisOauth2AccessToken">
+		insert into oauth_access_token (token_id, token, authentication_id,
+		authentication, refresh_token) values (#{tokenId}, #{token
+		,javaType=byte[],
+		jdbcType=BLOB,typeHandler=org.apache.ibatis.type.BlobTypeHandler},
+		#{authenticationId}, #{authentication ,javaType=byte[],
+		jdbcType=BLOB,typeHandler=org.apache.ibatis.type.BlobTypeHandler},
+		#{refreshToken})  
+    </insert>
+
+	<select id="readAccessToken" parameterType="string" resultMap="accessToken">
+		select token_id, token,authentication from oauth_access_token where
+		token_id = #{tokenValue}  
+    </select>
+
+	<delete id="removeAccessToken" parameterType="string">
+		delete from oauth_access_token where token_id = #{tokenValue}  
+    </delete>
+
+	<insert id="storeRefreshToken"
+		parameterType="cn.thiki.core.endpoint.entity.MybatisOauth2RefreshToken">
+		insert into oauth_refresh_token (token_id, token, authentication)
+		values (#{tokenId}, #{token ,javaType=byte[],
+		jdbcType=BLOB,typeHandler=org.apache.ibatis.type.BlobTypeHandler},
+		#{authentication ,javaType=byte[],
+		jdbcType=BLOB,typeHandler=org.apache.ibatis.type.BlobTypeHandler})  
+    </insert>
+
+	<select id="readRefreshToken" parameterType="string" resultMap="refreshToken">
+		select token_id, token,authentication from oauth_refresh_token where
+		token_id = #{tokenValue}  
+    </select>
+
+	<delete id="removeRefreshToken" parameterType="string">
+		delete from oauth_refresh_token where token_id = #{tokenValue}  
+    </delete>
+
+	<delete id="removeAccessTokenUsingRefreshToken" parameterType="string">
+		delete from oauth_access_token where refresh_token = #{tokenValue}  
+    </delete>
+
+	<select id="getAccessToken" parameterType="string" resultMap="accessToken">
+		select token_id, token from oauth_access_token where authentication_id
+		= #{authentication}  
+    </select>
+</mapper>  

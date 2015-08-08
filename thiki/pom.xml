@@ -32,34 +32,19 @@
 		<aspectjweaver.version>1.7.0</aspectjweaver.version>
 		<servlet-api.version>2.4</servlet-api.version>
 		<jsp-api.version>2.1.1</jsp-api.version>
-		<spring.context.version>3.1.1.RELEASE</spring.context.version>
-		<spring.webmvc.version>${spring.context.version}</spring.webmvc.version>
+		<spring.context.version>4.1.5.RELEASE</spring.context.version>
+		<spring.webmvc.version>4.1.5.RELEASE</spring.webmvc.version>
 		<logback-classic.version>1.0.6</logback-classic.version>
+		<spring.security.version>4.0.1.RELEASE</spring.security.version>
 		<!-- third jar version end -->
 	</properties>
 
 	<dependencyManagement>
 		<dependencies>
 
-			<!-- thiki begin -->
-			<dependency>
-				<groupId>cn</groupId>
-				<artifactId>thiki-common</artifactId>
-				<version>${thiki.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>cn</groupId>
-				<artifactId>thiki-dmo</artifactId>
-				<version>${thiki.version}</version>
-			</dependency>
 			<dependency>
 				<groupId>cn</groupId>
 				<artifactId>thiki-war</artifactId>
-				<version>${thiki.version}</version>
-			</dependency>
-			<dependency>
-				<groupId>cn</groupId>
-				<artifactId>thiki-web</artifactId>
 				<version>${thiki.version}</version>
 			</dependency>
 			<dependency>
@@ -187,6 +172,44 @@
 				<artifactId>logback-classic</artifactId>
 				<version>${logback-classic.version}</version>
 			</dependency>
+
+			<!-- spring security start -->
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-taglibs</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-acl</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-crypto</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+				<version>${spring.security.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security.oauth</groupId>
+				<artifactId>spring-security-oauth2</artifactId>
+				<version>2.0.7.RELEASE</version>
+			</dependency>
+			<!-- spring security end -->
 		</dependencies>
 	</dependencyManagement>
 
@@ -283,6 +306,44 @@
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-webmvc</artifactId>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
+		</dependency>
+		<!-- spring security start -->
+		<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-core</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-web</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-taglibs</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-acl</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-crypto</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security</groupId>
+				<artifactId>spring-security-config</artifactId>
+			</dependency>
+			<dependency>
+				<groupId>org.springframework.security.oauth</groupId>
+				<artifactId>spring-security-oauth2</artifactId>
+			</dependency>
+		
 	</dependencies>
 
 	<build>
@@ -678,10 +739,7 @@
 		</profile>
 	</profiles>
 	<modules>
-		<module>thiki-common</module>
-		<module>thiki-dmo</module>
 		<module>thiki-war</module>
-		<module>thiki-web</module>
 		<module>thiki-biz</module>
 	</modules>
 </project>

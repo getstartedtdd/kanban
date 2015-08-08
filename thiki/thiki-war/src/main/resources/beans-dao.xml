@@ -20,8 +20,8 @@
 	
 	<!-- 扫描basePackage下所有以@MyBatisRepository标识的 接口-->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="cn.thiki.dao" />
-		<property name="annotationClass" value="cn.thiki.annotation.MyBatisRepository" />
+		<property name="basePackage" value="cn.thiki.domain.*.dao" />
+		<property name="annotationClass" value="cn.thiki.core.annotation.MyBatisRepository" />
 	</bean>
 	
 	<bean id="transactionManager"
@@ -31,6 +31,4 @@
 	
 	<tx:annotation-driven transaction-manager="transactionManager" order="300" />
 	
-	
-
 </beans>
