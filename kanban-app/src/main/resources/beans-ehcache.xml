@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:p="http://www.springframework.org/schema/p" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:cache="http://www.springframework.org/schema/cache"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/cache http://www.springframework.org/schema/cache/spring-cache.xsd">
+	
+	<!-- 需要EHCache则此处支持，不需要的话，可以删除 -->
+	<!-- Switch on the Caching -->
+	<cache:annotation-driven />
+
+	<bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheCacheManager"
+		p:cacheManager-ref="ehcache" />
+
+	<bean id="ehcache"
+		class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"
+		p:configLocation="classpath:ehcache.xml" p:shared="true" />
+</beans>

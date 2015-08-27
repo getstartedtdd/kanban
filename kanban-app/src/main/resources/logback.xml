@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+
+	<!-- 日志文件目录 -->
+	<property name="log.path" value="/opt/epp/log/thiki" />
+	<!-- 环境配置 -->
+  	<property resource="/application.properties" />
+  	
+  	<!-- 控制台输出 -->
+	<appender name="stdout" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date|%thread|%X{invokeNo}|%level|%logger{50}|%msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- Action访问记录 -->
+	<appender name="actionAccessAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<file>${log.path}/action-access.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/action-access.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date|%thread|%X{invokeNo}|%X{ip}|%X{user}|%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- thiki -->
+	<appender name="mainAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>ACCEPT</onMismatch>
+		</filter>
+		<file>${log.path}/thiki.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/thiki.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<maxHistory>10</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>500MB</MaxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date|%thread|%X{invokeNo}|%level|%logger{0}|%msg%n
+			</pattern>
+		</encoder>
+	</appender>
+	
+	<!-- 错误 -->
+	<appender name="mainErrorAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${log.path}/error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/error.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date|%thread|%X{invokeNo}|%logger{0}|%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 其他日志 -->
+	<appender name="otherAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>DENY</onMatch>
+			<onMismatch>ACCEPT</onMismatch>
+		</filter>
+		<file>${log.path}/other.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/other.%d{yyyy-MM-dd}.%i.log
+			</fileNamePattern>
+			<maxHistory>10</maxHistory>
+			<timeBasedFileNamingAndTriggeringPolicy
+				class="ch.qos.logback.core.rolling.SizeAndTimeBasedFNATP">
+				<MaxFileSize>500MB</MaxFileSize>
+			</timeBasedFileNamingAndTriggeringPolicy>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date|%thread|%X{invokeNo}|%level|%logger{50}|%msg%n
+			</pattern>
+		</encoder>
+	</appender>
+
+	<!-- 其他错误日志 -->
+	<appender name="otherErrorAppender"
+		class="ch.qos.logback.core.rolling.RollingFileAppender">
+		<filter class="ch.qos.logback.classic.filter.LevelFilter">
+			<level>ERROR</level>
+			<onMatch>ACCEPT</onMatch>
+			<onMismatch>DENY</onMismatch>
+		</filter>
+		<file>${log.path}/other-error.log</file>
+		<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+			<fileNamePattern>${log.path}/other-error.%d{yyyy-MM-dd}.log
+			</fileNamePattern>
+			<maxHistory>10</maxHistory>
+		</rollingPolicy>
+		<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
+			<pattern>%date|%thread|%X{invokeNo}|%logger{50}|%msg%n</pattern>
+		</encoder>
+	</appender>
+
+	<!-- web层日志 -->
+	<logger name="cn.thiki.web" level="${thiki.log.level}" additivity="false">
+		<appender-ref ref="stdout" />
+		<appender-ref ref="actionAccessAppender" />
+	</logger>
+
+	<logger name="cn.thiki" level="${thiki.log.level}"
+		additivity="false">
+		<appender-ref ref="stdout" />
+		<appender-ref ref="mainAppender" />
+		<appender-ref ref="mainErrorAppender" />
+	</logger>
+
+	<logger name="ch.qos.logback" level="INFO" />
+	<logger name="org.springframework" level="INFO" />
+	<logger name="org.springframework.web.servlet.mvc.method" level="DEBUG" />
+	<logger name="net.sf.ehcache" level="INFO" />
+	<logger name="org.hibernate" level="INFO" />
+	<logger name="org.hibernate.SQL" level="INFO" />
+	<logger name="org.apache.ibatis" level="INFO" />
+	<logger name="org.mybatis.spring" level="INFO" />
+	<logger name="org.hibernate.cache" level="INFO" />
+	<logger name="org.apache.struts2" level="INFO" />
+	<logger name="org.apache.commons" level="INFO" />
+	<logger name="org.apache.velocity" level="ERROR" />
+	<logger name="org.apache.tiles" level="ERROR" />
+	<logger name="freemarker" level="ERROR" />
+	<logger name="com.opensymphony.xwork2" level="ERROR" />
+	<logger name="org.apache.commons.validator.ValidatorResources"
+		level="INFO" />
+
+	<logger name="java.sql.Connection" level="ERROR" />
+	<logger name="java.sql.Statement" level="ERROR" />
+	<logger name="java.sql.PreparedStatement" level="DEBUG" />
+	<logger name="java.sql.ResultSet" level="DEBUG" />
+	<logger name="org.mybatis" level="ERROR" />
+	<logger name="org.dozer" level="ERROR" />
+	
+	<!-- 根日志 -->
+	<root>
+		<level value="${thiki.log.level}" />
+		<appender-ref ref="otherAppender" />
+		<appender-ref ref="otherErrorAppender" />
+	</root>
+</configuration>

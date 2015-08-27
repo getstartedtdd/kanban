@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE Configure PUBLIC "-//MortBay Consulting//DTD Configure//EN" "http://jetty.mortbay.org/configure.dtd">
+
+<!-- 配置Server对象，此时会调用org.mortbay.jetty.Server默认构造函数new一个Server 路径：jetty-6.1.22\modules\jetty\src\main\java\org\mortbay\jetty\Server.java -->
+<Configure id="Server" class="org.eclipse.jetty.server.Server">
+	<!-- =========================================================== -->
+	<!-- 配置线程池 -->
+	<!-- =========================================================== -->
+
+	<!-- =========================================================== -->
+	<!-- 注册 connectors -->
+	<!-- =========================================================== -->
+	<!-- 调用当前Server对象的addConnector方法 -->
+	<Call name="addConnector">
+		<Arg> <!--Arg 标签表示addConnector方法的参数列表 -->
+			<!--new一个SelectChannelConnector对象 -->
+			<New class="org.eclipse.jetty.server.nio.SelectChannelConnector">
+				<!--调用当前SelectChannelConnector对象的setHost方法， host表示Connector需要监听的IP地址或者hostname， 
+					SystemProperty标签用来获取Java系统变量。 -->
+				<Set name="host">
+					<SystemProperty name="jetty.host" />
+				</Set>
+				<!-- 监听端口 -->
+				<Set name="port">
+					<SystemProperty name="jetty.port" default="9090" />
+				</Set>
+				<!-- 一个连接的最大空闲时间 -->
+				<Set name="maxIdleTime">30000</Set>
+				<!-- Acceptor线程数量，Accepto的功能是接收客户端连接然后分配个 ThreadPool处理 -->
+				<Set name="Acceptors">2</Set>
+				<!-- 是否开启统计功能 -->
+				<Set name="statsOn">false</Set>
+				<Set name="confidentialPort">8443</Set>
+				<!-- 连接数量达到该数值时，Jetty会认为服务器资源已被耗尽 -->
+				<Set name="lowResourcesConnections">5000</Set>
+				<!-- 当资源饱和时，连接最大等待时间，时间单位是毫秒 -->
+				<Set name="lowResourcesMaxIdleTime">5000</Set>
+			</New>
+		</Arg>
+	</Call>
+
+	<Set name="handler">
+		<New id="Handlers" class="org.eclipse.jetty.server.handler.HandlerCollection">
+			<Set name="handlers">
+				<Array type="org.eclipse.jetty.server.Handler">
+					<Item>
+						<New id="RequestLog" class="org.eclipse.jetty.server.handler.RequestLogHandler" />
+					</Item>
+				</Array>
+			</Set>
+		</New>
+	</Set>
+
+	<Ref id="RequestLog">
+		<Set name="requestLog">
+			<New id="RequestLogImpl" class="org.eclipse.jetty.server.NCSARequestLog">
+				<Set name="filename">
+					../Servers/jetty7/logs/yyyy_mm_dd.request.log
+				</Set>
+				<Set name="filenameDateFormat">yyyy_MM_dd</Set>
+				<Set name="retainDays">90</Set>
+				<Set name="append">true</Set>
+				<Set name="extended">true</Set>
+				<Set name="logCookies">false</Set>
+				<Set name="LogTimeZone">GMT+8</Set>
+			</New>
+		</Set>
+	</Ref>
+
+	<Set name="stopAtShutdown">true</Set>
+	<Set name="sendServerVersion">true</Set>
+	<Set name="sendDateHeader">true</Set>
+	<Set name="gracefulShutdown">1000</Set>
+</Configure>
